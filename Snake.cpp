@@ -177,6 +177,7 @@ void Start(Snake &player)
 	player.HideCursor();
 	*player.GetAlive() = true;
 	*player.GetScore() = 0;
+	*player.GetLength() = 0;
 	player.dir = player.STOP;
 	*player.GetX() = 20;
 	*player.GetY() = 10;
@@ -270,7 +271,7 @@ void Draw(Snake &player)
 			}
 						
 			//Player Movement and Check Walls and Tails
-			if(playerX > 0 && playerX < row - 1 && playerY > 0 && playerY < row - 1 && map[playerY][playerX] != 'o')
+			if(playerX > 0 && playerX < row - 1 && playerY > 0 && playerY < row - 1 && map[playerY][playerX] != 'o' && map[playerY][playerX] != '#')
 			{
 				map[playerY][playerX] = 'O';
 			}else
