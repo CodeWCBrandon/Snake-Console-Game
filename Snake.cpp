@@ -57,6 +57,15 @@ class Snake : public Fruit
 		    SetConsoleCursorInfo(hStdOut, &curInfo);
 		}
 		
+		void SetCursorPosition(int x, int y)
+		{
+			HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+			COORD coord;
+			coord.X = x;
+			coord.Y = y;
+			SetConsoleCursorPosition(handle, coord);
+		}
+		
 		//Tails
 		void AddTails(){ length++; }
 		int *GetLength(){ return &length; }
@@ -75,7 +84,7 @@ void Setup(Snake &player);
 void UserInput(Snake &player);
 void Start(Snake &player);
 void Draw(Snake &player);
-void ClearScreen();
+void ScreenDelay();
 void SnakeMovement(Snake &player);
 void AddScore(Snake &player, int score);
 
@@ -92,8 +101,7 @@ int main(void)
 		SnakeMovement(player);
 		Setup(player);
 		Draw(player);
-		ClearScreen();
-				
+		ScreenDelay();
 	}
 		
 
@@ -225,10 +233,9 @@ void SnakeMovement(Snake &player)
 
 }
 	
-void ClearScreen()
+void ScreenDelay()
 {
 	Sleep(100);
-	system("cls");
 }
 
 void Draw(Snake &player)
@@ -290,6 +297,9 @@ void Draw(Snake &player)
 
 		}
 	}
+	
+	//Set Cursor Position
+	player.SetCursorPosition(0, 0);
 	
 	//Print Map
 	for(int i = 0; i < col; i++)
